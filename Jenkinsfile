@@ -16,21 +16,33 @@ pipeline {
         stage('Docker build') {
             steps {
                 echo "Building the Docker image..."
-                sh 'docker build -t java-app:1.0 .'
+                sh 'docker build -t tishadev/java-app:1.0 .'
                 sh 'docker images'
+            }
+        }
+
+        stage('Docker Login') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                    sh """
+                        echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+                    """
+                }
+            }
+        }
+        stage('Push Docker Image') {
+            steps {
+                sh 'docker push tishadev/java-app:1.0'
             }
         }
     }
 
     post {
         success {
-            echo "Build Successful!"
-            script {
-                sh 'ls -la ./target'
-            }
+            echo "Job is successful!"
         }
         failure {
-            echo "Build failed! Please check the logs for details."
+            echo "Job is failed! Please check the logs for details."
         }
     }
 }
