@@ -12,9 +12,7 @@ pipeline {
                 sh 'mvn clean package'
             }
         }
-    }
 
-    stages {
         stage('Docker build') {
             steps {
                 echo "Building the Docker image..."
