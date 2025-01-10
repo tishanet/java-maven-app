@@ -14,6 +14,16 @@ pipeline {
         }
     }
 
+    stages {
+        stage('Docker build') {
+            steps {
+                echo "Building the Docker image..."
+                sh 'docker -t java-app:1.0'
+                sh 'docker iamges'
+            }
+        }
+    }
+
     post {
         success {
             echo "Build Successful!"
