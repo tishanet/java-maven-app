@@ -17,7 +17,7 @@ pipeline {
             steps {
                 echo "Building the Docker image..."
                 sh 'docker build -t java-app:1.0 .'
-                sh 'docker iamges'
+                sh 'docker images'
             }
         }
     }
