@@ -16,7 +16,7 @@ pipeline {
         stage('Docker build') {
             steps {
                 echo "Building the Docker image..."
-                sh 'docker build -t java-app:1.0'
+                sh 'docker build -t java-app:1.0 .'
                 sh 'docker iamges'
             }
         }
