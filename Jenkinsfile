@@ -1,11 +1,7 @@
 pipeline {
     agent any
-
     stages {
         stage('test') {
-            when {
-                expression
-            }
             steps {
                 echo "Testing the application"
                 echo "Executing pipeline for branch $BRANCH_NAME"
@@ -28,11 +24,13 @@ pipeline {
                 expression {
                     BRANCH_NAME == 'main'
                 }
+            }
             steps {
                 echo "Deploying the application"
             }
         }
-    }
+    } 
+
     post {
         success {
             echo "Job is successful!"
