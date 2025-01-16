@@ -9,22 +9,12 @@ pipeline {
         }
 
         stage('build') {
-            when {
-                expression {
-                    BRANCH_NAME == 'main'
-                }
-            }
             steps {
                 echo "Building the application"
             }
         }
-
+        
         stage('deploy') {
-            when {
-                expression {
-                    BRANCH_NAME == 'main'
-                }
-            }
             steps {
                 echo "Deploying the application"
                 script {
